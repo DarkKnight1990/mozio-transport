@@ -6,7 +6,7 @@ fake = Factory.create()
 from provider.models import ServiceProvider
 
 
-class ServiceProviderFactory(factory.Factory):
+class ServiceProviderFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = ServiceProvider
 
