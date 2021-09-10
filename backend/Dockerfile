@@ -4,7 +4,7 @@ ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 
 RUN apt-get update -y
-RUN apt-get install -y python3-pip python-dev build-essential
+RUN apt-get install -y python3-pip python-dev build-essential binutils libproj-dev gdal-bin
 RUN pip install --upgrade pip
 RUN apt-get install -y ghostscript libgs-dev
 RUN apt-get install -y libmagickwand-dev imagemagick --fix-missing
