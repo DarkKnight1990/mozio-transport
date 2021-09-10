@@ -4,10 +4,6 @@ The API documentation can be found in much more details [here](https://documente
 
 <hr />
 
-BACKEND/PYTHON CODING PROJECT:
-
-Mozio Backend Potential hire Project 2.0
-
 Goals:
 
     - demonstrate proficiency in Django/Python
