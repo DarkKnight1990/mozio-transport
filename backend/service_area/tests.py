@@ -18,3 +18,15 @@ class ServiceAreaTests(test.APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(ServiceArea.objects.count(), 1)
         self.assertEqual(ServiceArea.objects.get().name, payload["name"])
+
+    def test_search_service_area(self):
+        test_area = ServiceAreaFactory.create()
+        url = reverse("search-area", kwargs={"longitude": "78.7720", "latitude": "22.5126"})
+        response = self.client.get(url)
+        self.assertEqual(test_area.name, response.data[0]["name"])
+
+    def test_service_area_not_present(self):
+        test_area = ServiceAreaFactory.create()
+        url = reverse("search-area", kwargs={"longitude": "178.7720", "latitude": "22.5126"})
+        response = self.client.get(url)
+        self.assertEqual(len(response.data), 0)
