@@ -1,3 +1,4 @@
+from django.http import response
 from django.urls import reverse
 
 from rest_framework import test, status
@@ -24,3 +25,23 @@ class ServiceProviderTests(test.APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(ServiceProvider.objects.count(), 1)
         self.assertEqual(ServiceProvider.objects.get().name, provider.name)
+
+    def test_get_service_provider(self):
+        """
+        test get API
+        """
+        provider = ServiceProviderFactory.create()
+        url = reverse("service-provider-detail", args=[provider.pk])
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(provider.name, response.data["name"])
+
+    def test_delete_service_provider(self):
+        """
+        test delete API
+        """
+        provider = ServiceProviderFactory.create()
+        url = reverse("service-provider-detail", args=[provider.pk])
+        self.assertEqual(ServiceProvider.objects.count(), 1)
+        response = self.client.delete(url)
+        self.assertEqual(ServiceProvider.objects.count(), 0)
